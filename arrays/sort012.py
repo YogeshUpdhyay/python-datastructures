@@ -1,3 +1,5 @@
+# two pointer method
+
 def sort012(arr, n):
     # in case when sorting is not allowed look for swapping methods 
     low = 0
