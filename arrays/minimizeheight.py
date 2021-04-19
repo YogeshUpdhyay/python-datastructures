@@ -50,8 +50,6 @@ def getMinDiff(arr, n, k):
     
     return ans
 
-
-
 if __name__ == '__main__':
     arr = list(map(int, input().strip().split()))
     k = int(input())
