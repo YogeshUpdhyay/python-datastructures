@@ -10,8 +10,7 @@ def partition(arr, start, end):
         if arr[i] < p:
             left.append(arr[i])
 
-    arr[start:end+1] = left + [p] + right   
-    # print(*arr[start:end+1], sep=" ")  
+    arr[start:end+1] = left + [p] + right
     return start+len(left)
 
 def quick_sort(arr, start, end):
