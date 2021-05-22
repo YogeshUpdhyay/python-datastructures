@@ -26,8 +26,6 @@ def insertionSort2(n, arr):
 
         arr[hole] = value
         print(*arr, sep=" ")
-                
-    
 
 if __name__ == '__main__':
     n = int(input().strip())
