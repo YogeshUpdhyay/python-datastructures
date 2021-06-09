@@ -1,6 +1,7 @@
 from typing import List
 
-# negative pointer approach
+# negative pointer approach 
+# to be used when the array containe elements in range(1, n) only *****
 def findDuplicate(nums: List[int]) -> int:
     for n in nums:
         m=abs(n)
