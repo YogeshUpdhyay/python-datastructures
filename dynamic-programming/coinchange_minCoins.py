@@ -8,7 +8,7 @@ def minCoins(n, arr, dp):
 
 	for i in arr:
 		if n-i >= 0:
-			if dp[n-1] != -1:
+			if dp[n-i] != -1:
 				subans = dp[n-i]
 			else:
 				subans = minCoins(n-i, arr, dp)

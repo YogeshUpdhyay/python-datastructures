@@ -14,7 +14,6 @@ def maxProfit(c, n, w, p, dp):
 
     return dp[i][j]
 
-    return 0
 if __name__ == '__main__':
     c = int(input().strip())
 
