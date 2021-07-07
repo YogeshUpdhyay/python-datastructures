@@ -9,3 +9,4 @@ Problem Solving and DSA using python.
 - Stack
 - String
 - Trees
+- Greedy 
