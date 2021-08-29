@@ -8,21 +8,26 @@ def spiral_traversal(matrix, r, c):
                 ans.append(matrix[top][i])
             top+=1
             dir+=1
+            continue
         if dir == 1:
             for i in range(top, bottom+1):
                 ans.append(matrix[i][right])
             right-=1
             dir+=1
+            continue
         if dir == 2:
             for i in range(right, left-1, -1):
                 ans.append(matrix[bottom][i])
             bottom-=1
             dir+=1
+            continue
         if dir == 3:
             for i in range(bottom, top-1, -1):
                 ans.append(matrix[i][left])
             left+=1
-        dir = (dir+1) % 4
+            dir+=1
+            continue
+        dir = dir-4
     return ans
 
 if __name__ == '__main__':
