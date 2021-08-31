@@ -15,9 +15,9 @@
 #     return max_so_far
 
 def maxSubArraySum(a, size):
-    current_max = global_max = a[0]
+    current_max = global_max = [0]
     for i in range(1,size):
-        current_max = max(a[i], a[i]+current_max)
+        current_max = max([i], [i]+current_max)
         if current_max > global_max:
             global_max = current_max
     
