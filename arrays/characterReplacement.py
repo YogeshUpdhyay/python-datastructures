@@ -4,7 +4,7 @@ def characterReplacement(s: str, k: int) -> int:
     for right in range(len(s)):
         char = s[right]
         
-        chars[char] = 1 + (chars.get(char, 0))
+        chars[char] = 1 + chars.get(char, 0)
         maxf = max(maxf, chars[char])
         
         while (right-left+1) - maxf > k:
