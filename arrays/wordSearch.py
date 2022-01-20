@@ -1,59 +1,77 @@
-def findmatch(mat, pat, x, y,
-              nrow, ncol, level) :
- 
-    l = len(pat)
- 
-    # Pattern matched
-    if (level == l) :
+
+
+def findnext(board, word, i, j, nrows, ncols):
+    if word == "":
         return True
- 
-    # Out of Boundary
-    if (x < 0 or y < 0 or
-        x >= nrow or y >= ncol) :
-        return False
- 
-    # If grid matches with a letter
-    # while recursion
-    if (mat[x][y] == pat[level]) :
- 
-        # Marking this cell as visited
-        temp = mat[x][y]
-        mat[x].replace(mat[x][y], "#")
- 
-        # finding subpattern in 4 directions
-        res = (findmatch(mat, pat, x - 1, y, nrow, ncol, level + 1) |
-               findmatch(mat, pat, x + 1, y, nrow, ncol, level + 1) |
-               findmatch(mat, pat, x, y - 1, nrow, ncol, level + 1) |
-               findmatch(mat, pat, x, y + 1, nrow, ncol, level + 1))
- 
-        # marking this cell as unvisited again
-        mat[x].replace(mat[x][y], temp)
-        return res
-     
-    else : # Not matching then false
-        return False
- 
-# Function to check if the word
-# exists in the grid or not
-def checkMatch(board, word) :
- 
-    l = len(word)
-    nrow = len(board)
-    ncol = len(board[0])
- 
-    # if total characters in matrix is
-    # less then pattern lenghth
-    if (l > nrow * ncol) :
-        return False
- 
-    # Traverse in the grid
-    for i in range(nrow) :
-        for j in range(ncol) :
- 
-            # If first letter matches, then
-            # recur and check
-            if (board[i][j] == word[0]) :
-                if (findmatch(board, word, i, j,
-                              nrow, ncol, 0)) :
-                    return True
+
+    # Checking right
+    if j+1 < ncols and board[i][j+1] == word[0]:
+        temp = board[i][j+1]
+        board[i][j+1] = "$"
+        if findnext(board, word[1:], i, j+1, nrows, ncols):
+            return True
+        else:
+            board[i][j+1] = temp
+
+    # Checking left
+    if j-1 >= 0 and board[i][j-1] == word[0]:
+        temp = board[i][j-1]
+        board[i][j-1] = "$"
+        if findnext(board, word[1:], i, j-1, nrows, ncols):
+            return True
+        else:
+            board[i][j-1] = temp
+
+    # Checking top
+    if i-1 >= 0 and board[i-1][j] == word[0]:
+        temp = board[i-1][j]
+        board[i-1][j] = "$"
+        if findnext(board, word[1:], i-1, j, nrows, ncols):
+            return True
+        else:
+            board[i-1][j] = temp
+
+    # Checking down
+    if i+1 < nrows and board[i+1][j] == word[0]:
+        temp = board[i+1][j]
+        board[i+1][j] = "$"
+        if findnext(board, word[1:], i+1, j, nrows, ncols):
+            return True
+        else:
+            board[i+1][j] = temp
+
     return False
+
+
+def exist(board, word):
+    nrows = len(board)
+    ncols = len(board[0])
+
+    smap = {}
+    for i in range(nrows):
+        for j in range(ncols):
+            if smap.get(board[i][j]) is None:
+                smap[board[i][j]] = [[i, j]]
+            else:
+                smap[board[i][j]].append([i, j])
+
+    for i in smap.get(word[0], []):
+        temp = board[i[0]][i[1]]
+        board[i[0]][i[1]] = "$"
+        if findnext(board, word[1:], i[0], i[1], nrows, ncols):
+            return True
+        else:
+            board[i[0]][i[1]] = temp
+
+    return False
+
+
+if __name__ == "__main__":
+    nrows = int(input())
+    board = []
+    for i in range(nrows):
+        board.append(list(input().split(" ")))
+
+    word = input()
+
+    print(exist(board, word))
