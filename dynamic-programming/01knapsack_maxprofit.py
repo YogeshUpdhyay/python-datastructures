@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     n = len(w)
     #  filling base conditions
-    dp = [[-1]*(c+1) for _ in range(n+2)]
+    dp = [[-1]*(c+1) for _ in range(n+1)]
     for i in dp:
         i[0] = 0
     dp[0] = [0]*(c+1)
